@@ -8,9 +8,9 @@ terraform {
 }
 
 resource "proxmox_virtual_environment_container" "pihole" {
-  description = "PiHole DNS Ad-Blocker Container"
-  node_name   = var.proxmox_node
-  vm_id       = null # Auto-assign
+  description  = "PiHole DNS Ad-Blocker Container"
+  node_name    = var.proxmox_node
+  vm_id        = null # Auto-assign
   unprivileged = true
 
   initialization {
@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_container" "pihole" {
     }
 
     user_account {
-      keys = var.ssh_public_key != "" ? [var.ssh_public_key] : []
+      keys     = var.ssh_public_key != "" ? [var.ssh_public_key] : []
       password = "terraform123"
     }
   }

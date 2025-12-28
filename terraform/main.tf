@@ -9,7 +9,7 @@ module "homeassistant" {
   proxmox_node     = var.proxmox_node
   storage_location = var.storage_location
 
-  hostname = var.homeassistant_hostname
+  hostname   = var.homeassistant_hostname
   ip_address = "${var.homeassistant_ip}${var.network_cidr}"
   gateway    = var.network_gateway
   dns        = var.network_dns

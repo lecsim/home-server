@@ -8,9 +8,9 @@ terraform {
 }
 
 resource "proxmox_virtual_environment_container" "prometheus" {
-  description = "Prometheus Monitoring Container"
-  node_name   = var.proxmox_node
-  vm_id       = null # Auto-assign
+  description  = "Prometheus Monitoring Container"
+  node_name    = var.proxmox_node
+  vm_id        = null # Auto-assign
   unprivileged = true
 
   initialization {
@@ -28,7 +28,7 @@ resource "proxmox_virtual_environment_container" "prometheus" {
     }
 
     user_account {
-      keys = var.ssh_public_key != "" ? [var.ssh_public_key] : []
+      keys     = var.ssh_public_key != "" ? [var.ssh_public_key] : []
       password = "terraform123"
     }
   }
