@@ -1,0 +1,30 @@
+# Proxmox Connection
+proxmox_api_url      = "https://192.168.1.100:8006/api2/json"
+proxmox_api_token_id = "root@pam!terraform"
+proxmox_api_token    = "your-token-secret-here"
+proxmox_tls_insecure = true
+proxmox_node         = "pve"
+
+# Network Configuration
+network_bridge  = "vmbr0"
+network_gateway = "192.168.1.1"
+network_dns     = "192.168.1.1"
+network_cidr    = "/24"
+
+# Storage
+storage_location = "local-lvm"
+
+# Service IP Addresses
+homeassistant_ip = "192.168.1.10"
+pihole_ip        = "192.168.1.11"
+prometheus_ip    = "192.168.1.12"
+grafana_ip       = "192.168.1.13"
+
+# Optional: Service aktivieren/deaktivieren
+homeassistant_enabled = true
+pihole_enabled        = true
+prometheus_enabled    = true
+grafana_enabled       = true
+
+# Optional: SSH Public Key für direkten Container-Zugriff
+# ssh_public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAB..."
