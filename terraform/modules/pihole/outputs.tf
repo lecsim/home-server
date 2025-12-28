@@ -1,6 +1,6 @@
 output "container_id" {
   description = "Proxmox container ID"
-  value       = proxmox_lxc.pihole.vmid
+  value       = proxmox_virtual_environment_container.pihole.id
 }
 
 output "ip_address" {

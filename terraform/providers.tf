@@ -3,8 +3,8 @@ terraform {
 
   required_providers {
     proxmox = {
-      source  = "telmate/proxmox"
-      version = "~> 2.9"
+      source  = "bpg/proxmox"
+      version = "~> 0.90"
     }
   }
 
@@ -17,16 +17,7 @@ terraform {
 }
 
 provider "proxmox" {
-  pm_api_url          = var.proxmox_api_url
-  pm_api_token_id     = var.proxmox_api_token_id
-  pm_api_token_secret = var.proxmox_api_token
-  pm_tls_insecure     = var.proxmox_tls_insecure
-
-  # Logging (optional)
-  pm_log_enable = true
-  pm_log_file   = "terraform-plugin-proxmox.log"
-  pm_log_levels = {
-    _default    = "debug"
-    _capturelog = ""
-  }
+  endpoint = var.proxmox_api_url
+  api_token = "${var.proxmox_api_token_id}=${var.proxmox_api_token}"
+  insecure  = var.proxmox_tls_insecure
 }

@@ -1,6 +1,6 @@
 output "container_id" {
   description = "Proxmox container ID"
-  value       = proxmox_lxc.homeassistant.vmid
+  value       = proxmox_virtual_environment_container.homeassistant.id
 }
 
 output "ip_address" {

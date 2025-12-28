@@ -48,14 +48,11 @@ variable "disk_size" {
   type        = string
 }
 
-variable "ssh_public_key" {
-  description = "SSH public key for access"
+variable "prometheus_url" {
+  description = "Prometheus URL for datasource (e.g., 192.168.0.12:9090)"
   type        = string
-  default     = ""
 }
 
-variable "prometheus_url" {
-  description = "Prometheus URL for datasource"
-  type        = string
-  default     = ""
+variable "ssh_public_key" {
+  description = "SSH public key for access"
 }

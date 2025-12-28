@@ -48,26 +48,20 @@ variable "disk_size" {
   type        = string
 }
 
-variable "ssh_public_key" {
-  description = "SSH public key for access"
-  type        = string
-  default     = ""
-}
-
 variable "homeassistant_ip" {
-  description = "HomeAssistant IP for monitoring"
+  description = "HomeAssistant IP address"
   type        = string
-  default     = ""
 }
 
 variable "pihole_ip" {
-  description = "PiHole IP for monitoring"
+  description = "PiHole IP address"
   type        = string
-  default     = ""
 }
 
 variable "grafana_ip" {
-  description = "Grafana IP for monitoring"
+  description = "Grafana IP address"
   type        = string
-  default     = ""
+}
+
+variable "ssh_public_key" {
 }

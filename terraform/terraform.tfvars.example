@@ -1,9 +1,9 @@
 # Proxmox Connection
-proxmox_api_url      = "https://192.168.1.100:8006/api2/json"
+proxmox_api_url      = "https://192.168.0.228:8006/api2/json"
 proxmox_api_token_id = "root@pam!terraform"
 proxmox_api_token    = "your-token-secret-here"
 proxmox_tls_insecure = true
-proxmox_node         = "pve"
+proxmox_node         = "proxmox"
 
 # Network Configuration
 network_bridge  = "vmbr0"
