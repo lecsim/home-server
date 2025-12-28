@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 env:
-  TF_VERSION: '1.6.0'
+  TF_VERSION: '1.8.5'
 
 jobs:
   terraform-check:
@@ -89,7 +89,8 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
     needs: terraform-check
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # Disabled: Apply nur lokal ausführen, da Proxmox im privaten Netzwerk
+    if: false
     environment: production
     
     steps:
