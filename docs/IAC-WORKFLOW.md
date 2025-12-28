@@ -2,6 +2,17 @@
 
 Dieses Projekt verwendet einen vollständigen IaC-Ansatz für den Home-Server mit Terraform und Bash-Scripten.
 
+## 💾 Datenpersistenz
+
+**Wichtig:** Konfigurationsdaten werden **in den Containern** gespeichert. Um sie zu sichern, nutze die Backup-Scripts:
+
+- HomeAssistant: `/opt/homeassistant/config`
+- Prometheus: `/var/lib/prometheus`
+- Grafana: `/var/lib/grafana`
+- PiHole: `/etc/pihole`
+
+**Vor einem Rebuild: Backup erstellen! Dann nach Rebuild: Restore.**
+
 ## 🏗️ Architektur
 
 **Terraform** erstellt:
@@ -84,11 +95,63 @@ ssh root@192.168.0.228 "pct exec 102 -- docker compose -f /opt/homeassistant/doc
 
 ### Alles neu deployen (nach Code-Änderungen):
 
+**Mit Datensicherung:**
 ```bash
-cd terraform
-terraform apply
-cd ..
-bash scripts/setup-from-proxmox.sh
+# 1. Backup erstellen
+bash scripts/backup-data.sh
+
+# 2. Neu deployen
+bash scripts/test-iac.sh
+
+# 3. Daten wiederherstellen
+bash scripts/restore-data.sh /backup/home-server/YYYYMMDD_HHMMSS
+```
+
+**Ohne Daten (fris (sichert Daten AUS den Containern)che Installation):**
+```bash
+bash scripts/test-iac.sh
+```
+
+## 💾 Backup & Restore
+
+### Backup erstellen
+
+**Auf dem Proxmox Host:**
+```bash
+# Manuelles Backup
+bash scripts/backup-data.sh
+
+# Backups liegen in: /backup/home-server/YYYYMMDD_HHMMSS/
+```
+
+**Automatisches Backup (Cronjob):**
+```bash
+# Tägliches Backup um 3 Uhr nachts - auf Proxmox Host ausführen:
+crontab -e
+# Dann hinzufügen:
+0 3 * * * /root/home-server/scripts/backup-data.sh
+```
+
+### Daten wiederherstellen
+
+```bash
+# Verfügbare Backups anzeigen
+bash scripts/restore-data.sh
+
+# Restore ausführen
+bash scripts/restore-data.sh /backup/home-server/20231228_030000
+```
+
+### Externes Backup
+
+Sichere `/backup/` auf ein externes Medium:
+
+```bash
+# Mit rsync zu NAS/USB
+rsync -avz /backup/home-server/ /mnt/nas/home-server-backups/
+
+# Oder mit tar
+tar czf /mnt/usb/home-server-$(date +%Y%m%d).tar.gz /backup/home-server
 ```
 
 ## 🧪 Testen ob alles funktioniert:
